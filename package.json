@@ -1,0 +1,13 @@
+{
+  "name": "adora-innovations-landing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Adora Innovations — one-page landing site with early-access capture.",
+  "scripts": {
+    "deploy": "vercel --prod"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

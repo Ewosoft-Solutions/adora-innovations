@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+*.log
+
+# Vercel CLI link data and the OIDC token it writes
+.vercel
+
+# Real keys never get committed — the template does
+.env
+.env*.local
+!.env.example

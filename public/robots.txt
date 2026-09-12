@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://adorainnovations.com/sitemap.xml
