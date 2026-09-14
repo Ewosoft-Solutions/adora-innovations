@@ -67,6 +67,50 @@ the whole list, delete contacts. So keep it to a Vercel environment variable, ne
 a file in this repo, and generate a **separate key for the website** so it can be
 revoked on its own without breaking other integrations.
 
+## 1b. Get told about every signup
+
+A contact sitting in a Brevo dashboard is easy to miss. Set these so each
+submission also reaches you directly. Both are optional and independent.
+
+### Email alert (needs Brevo)
+
+1. In Brevo: **Senders, Domains & Dedicated IPs → Senders → Add a sender**, and
+   verify an address you control (click the link Brevo emails you).
+2. In Vercel → Settings → Environment Variables:
+
+   | Name | Value |
+   |---|---|
+   | `NOTIFY_EMAIL` | where alerts land, e.g. `esther@adorainnovations.com` |
+   | `NOTIFY_FROM` | the sender address you just verified |
+
+You get one email per signup, with the person's name and address, and
+**reply-to set to them** — so replying goes straight to the lead. If the mailing
+list write failed, the subject is prefixed `ACTION NEEDED` and the body says why.
+
+### Google Sheet (no credentials needed)
+
+1. In a new Google Sheet: **Extensions → Apps Script**, paste:
+
+   ```javascript
+   function doPost(e) {
+     const d = JSON.parse(e.postData.contents);
+     SpreadsheetApp.getActiveSheet().appendRow(
+       [new Date(), d.name, d.email, d.capturedInList ? 'in list' : 'NOT in list']);
+     return ContentService.createTextOutput('ok');
+   }
+   ```
+
+2. **Deploy → New deployment → Web app**, execute as *Me*, access *Anyone*.
+   Copy the `/exec` URL.
+3. Set it as `SIGNUP_WEBHOOK_URL` in Vercel.
+
+Every submission then appends a row automatically.
+
+> Notifications can never fail a signup. If the alert bounces, the visitor still
+> sees success as long as the list write worked — and vice versa: if the list is
+> full but the alert got through, the signup still counts, because the lead
+> reached a human. Only when *nothing* works does the visitor see an error.
+
 ### When the list is full
 
 The code does **not** enforce a contact cap of its own — a hard cap would stop
@@ -165,5 +209,9 @@ Colours are CSS variables at the top of `public/styles.css` — `--navy`, `--blu
   shows `esther@adorainnovations.com` so the lead is not lost.
 - A hidden honeypot field and a per-IP rate limit (15 submissions / 10 minutes)
   keep out casual bot spam.
-- Leads are only ever reported as captured when the provider actually accepted
-  them. The form never shows a success state it cannot back up.
+- Leads are only ever reported as captured when the provider accepted them, or
+  when an alert/webhook actually delivered. The form never shows a success state
+  it cannot back up.
+- The header logo ships at 1x/2x/3x via `srcset` (5.6 KB on a typical phone
+  instead of 113 KB) so it stays sharp on high-density screens.
+- The hero report card is an **illustrative** example, labelled as such.
