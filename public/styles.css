@@ -608,6 +608,56 @@ a:hover { text-decoration: underline; }
   text-wrap: pretty;
 }
 
+/* Founder note */
+
+.founder {
+  padding-block: var(--sect-y);
+  background: var(--surface);
+  border-top: 1px solid var(--line-soft);
+}
+.founder-inner { max-width: 44rem; }
+
+.founder blockquote {
+  margin: 22px 0 0;
+  padding-left: 20px;
+  border-left: 2px solid;
+  border-image: linear-gradient(180deg, var(--blue-light), rgba(14, 89, 242, .12)) 1;
+  display: grid;
+  gap: 16px;
+}
+.founder blockquote p {
+  font-size: 1.0625rem;
+  line-height: 1.66;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+.founder .founder-punch {
+  font-weight: 650;
+  color: var(--navy);
+  letter-spacing: -.012em;
+}
+
+.founder-sign {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 26px;
+  padding-left: 22px;
+}
+.founder-sign img { width: auto; height: 30px; flex: none; }
+.founder-sign span {
+  display: grid;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink-3);
+}
+.founder-sign b {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -.01em;
+}
+
 /* Section 5 — Early access */
 
 .cta {
