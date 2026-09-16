@@ -76,8 +76,7 @@
           'stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' +
         '</span>' +
         '<h3>You&rsquo;re on the list' + (safe ? ', ' + safe : '') + '.</h3>' +
-        '<p>We&rsquo;ll email you personally when early access opens. ' +
-        'No spam, no sales calls &mdash; just a demo with your own supplier quotes.</p>' +
+        '<p>We&rsquo;ll be in touch to arrange a short demo using your own supplier quotes.</p>' +
       '</div>';
     status.classList.add('is-visible');
   }
